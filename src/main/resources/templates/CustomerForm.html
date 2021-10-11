@@ -1,0 +1,57 @@
+<style>
+    .Error {
+        color: red;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Customer</title>
+</head>
+<body>
+<main>
+    <h1>New Customer</h1>
+    <form th:object="${person}"
+          th:action="@{/persons/add}"
+          method="post">
+        <div>
+            <label for="name">Name*</label>
+            <input id="name" th:field = "*{name}"
+                   type = "text">
+            <p th:if="${#fields.hasErrors('name')}"
+               th:text="${#strings.listJoin(#fields.errors('name'), ',')}"
+               th:class="${#fields.hasErrors('name')}? error">
+                Invalid name
+            </p>
+
+            </div>
+        <br>
+        <div>
+        <label for="email">Email*</label>
+        <input id="email" th:field = "*{email}"
+               type = "text">
+        <p th:if="${#fields.hasErrors('email')}"
+           th:text="${#strings.listJoin(#fields.errors('email'), ',')}"
+           th:class="${#fields.hasErrors('email')}? error">
+            Invalid email
+        </p>
+        </div>
+        <br>
+        <div>
+        <label for="postalcode">postcode*</label>
+        <input id="postalcode" th:field = "*{postalcode}"
+               type = "text">
+        <p th:if="${#fields.hasErrors('postalcode')}"
+           th:text="${#strings.listJoin(#fields.errors('postalcode'), '')}"
+           th:class="${#fields.hasErrors('postalcode')}? error">
+            Invalid postalcode
+        </p>
+        </div>
+        <br>
+        <button type="submit">Add customer</button>
+    </form>
+</main>
+</body>
+</html>
