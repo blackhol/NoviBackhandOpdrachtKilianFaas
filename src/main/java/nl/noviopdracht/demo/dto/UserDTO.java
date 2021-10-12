@@ -1,14 +1,28 @@
-package nl.noviopdracht.demo;
+package nl.noviopdracht.demo.dto;
+
+import javax.validation.constraints.NotBlank;
+
 
 import java.sql.Date;
 
+public class UserDTO {
 
-public class User {
+    private Long id;
+
+    @NotBlank(message = "You need to fill in a name")
     private String name;
+
+    @NotBlank(message = "You need to fill in a email")
     private String email;
+
+    @NotBlank(message = "You need to fill in a password")
     private String password;
+
     private String note;
+
     private Date birthday;
+
+
     private String profession;
 
     public String getName() {
@@ -72,4 +86,18 @@ public class User {
                 ", profession='" + profession + '\'' +
                 '}';
     }
+
+    public UserDTO(Long id, String name, String email, String password, String note, Date birthday, String profession) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.note = note;
+        this.birthday = birthday;
+        this.profession = profession;
+    }
+    public UserDTO() {
+
+    }
+
 }
