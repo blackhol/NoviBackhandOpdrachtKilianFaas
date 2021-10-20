@@ -1,6 +1,6 @@
-package nl.noviopdracht.demo.repository;
+package nl.noviopdracht.demo.Repository;
 
-import nl.noviopdracht.demo.model.User;
+import nl.noviopdracht.demo.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

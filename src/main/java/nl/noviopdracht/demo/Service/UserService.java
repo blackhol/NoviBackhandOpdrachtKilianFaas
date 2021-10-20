@@ -1,7 +1,6 @@
-package nl.noviopdracht.demo.service;
+package nl.noviopdracht.demo.Service;
 
-import nl.noviopdracht.demo.dto.UserDTO;
-import nl.noviopdracht.demo.model.User;
+import nl.noviopdracht.demo.DTO.UserDTO;
 
 public interface UserService {
 

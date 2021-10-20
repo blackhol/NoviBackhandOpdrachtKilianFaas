@@ -1,8 +1,8 @@
 package nl.noviopdracht.demo.Controller;
 
-import nl.noviopdracht.demo.dto.UserDTO;
-import nl.noviopdracht.demo.model.User;
-import nl.noviopdracht.demo.service.UserService;
+import nl.noviopdracht.demo.DTO.UserDTO;
+import nl.noviopdracht.demo.Service.PartService;
+import nl.noviopdracht.demo.Service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,9 +17,9 @@ import java.util.List;
 @Controller
 public class MainController {
 
-
     private final UserService uService;
-    public MainController(UserService uService){
+
+    public MainController( UserService uService){
         this.uService = uService;
     }
 
@@ -28,7 +28,6 @@ public class MainController {
     public String showForm(Model model) {
         UserDTO userDTO = new UserDTO();
         model.addAttribute("user", userDTO);
-
         List<String> listProfession = Arrays.asList("Customer","Mechanic", "BackOfficeWorker", "AdmAssistant", "cashier");
         model.addAttribute("listProfession", listProfession);
 
@@ -55,4 +54,7 @@ public class MainController {
             return "register_success";
         }
     }
+
+
+
 }

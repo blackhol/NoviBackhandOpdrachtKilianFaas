@@ -1,4 +1,4 @@
-package nl.noviopdracht.demo.model;
+package nl.noviopdracht.demo.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import java.sql.Date;
     @Entity
 public class User {
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
     @NotBlank(message = "You need to fill in a name")
     private String name;

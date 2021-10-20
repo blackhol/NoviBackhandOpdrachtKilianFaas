@@ -1,4 +1,4 @@
-package nl.noviopdracht.demo.dto;
+package nl.noviopdracht.demo.DTO;
 
 import javax.validation.constraints.NotBlank;
 

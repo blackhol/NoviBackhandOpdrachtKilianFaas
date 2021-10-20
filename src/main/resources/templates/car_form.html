@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>car_form</title>
+</head>
+<body>
+<div align="center">
+
+    <h1>add car to customer form</h1>
+    <br>
+    <form action="#" th:action="@{add_car}" method="post" th:object="${car}">
+        <label>CarOwner:</label>
+        <select th:field="*{OwnerID}">
+            <option th:each="c : ${listOfCustomers}" th:value="${c}" th:text="${c}" />
+        </select>
+
+
+
+
+
+    </form>
+
+    <button><a href="/">Homepage</a></button>
+</div>
+</body>
+</html>

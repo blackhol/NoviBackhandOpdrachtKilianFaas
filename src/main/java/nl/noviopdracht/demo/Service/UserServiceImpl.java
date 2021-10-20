@@ -1,14 +1,14 @@
-package nl.noviopdracht.demo.service;
+package nl.noviopdracht.demo.Service;
 
 
-import nl.noviopdracht.demo.dto.UserDTO;
-import nl.noviopdracht.demo.model.User;
-import nl.noviopdracht.demo.repository.UserRepository;
+import nl.noviopdracht.demo.DTO.UserDTO;
+import nl.noviopdracht.demo.Model.User;
+import nl.noviopdracht.demo.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
 
+    public class UserServiceImpl implements UserService {
     private final UserRepository repos;
     public UserServiceImpl(UserRepository repos){
         this.repos = repos;
