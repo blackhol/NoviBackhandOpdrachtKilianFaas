@@ -1,12 +1,15 @@
 package nl.noviopdracht.demo.DTO;
 
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 
 public class CarDTO {
 
     @NotNull
-    int OwnerID;
+    long ownerID;
     @NotBlank
     String carBrand;
     @NotBlank
@@ -14,12 +17,21 @@ public class CarDTO {
 
     String notes;
 
-    public int getOwnerID() {
-        return OwnerID;
+
+    public String getNotes() {
+        return notes;
     }
 
-    public void setOwnerID(int ownerID) {
-        OwnerID = ownerID;
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public long getOwnerID() {
+        return ownerID;
+    }
+
+    public void setOwnerID(long ownerID) {
+        this.ownerID = ownerID;
     }
 
     public String getCarBrand() {
@@ -38,21 +50,15 @@ public class CarDTO {
         this.licencePlate = licencePlate;
     }
 
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
 
     public CarDTO() {
     }
 
-    public CarDTO(int userID, String carBrand,String licencePlate,String notes) {
-        OwnerID = userID;
+    public CarDTO(int userID, String carBrand,String licencePlate, String notes) {
+        ownerID = userID;
+        this.notes = notes;
         this.carBrand = carBrand;
         this.licencePlate = licencePlate;
-        this.notes = notes;
+
     }
 }

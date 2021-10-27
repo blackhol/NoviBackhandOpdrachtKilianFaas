@@ -1,13 +1,14 @@
 package nl.noviopdracht.demo.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.expression.spel.ast.Operator;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
+import java.util.List;
 
-    @Entity
+@Entity
+@Table(name = "user")
 public class User {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +26,18 @@ public class User {
 
     private Date birthday;
 
+    @OneToMany(mappedBy = "owner")
+    private List<Car> ownedCars;
 
     private String profession;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

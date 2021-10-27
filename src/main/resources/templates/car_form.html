@@ -9,18 +9,34 @@
 
     <h1>add car to customer form</h1>
     <br>
-    <form action="#" th:action="@{add_car}" method="post" th:object="${car}">
+    <form action="#" th:action="@{/add_car}" method="post" th:object="${car}">
         <label>CarOwner:</label>
-        <select th:field="*{OwnerID}">
-            <option th:each="c : ${listOfCustomers}" th:value="${c}" th:text="${c}" />
+
+        <select class="form-control" th:field="${car.ownerID}"  id="dropOperator">
+            <option value="0">select customer</option>
+            <option th:each="u : ${User}" th:value="${u.id}" th:text="${u.name}"></option>
         </select>
+        <br>
+        <br>
+        <label>Carbrand:</label>
+        <input type="text" th:field="${car.carBrand}" >
+        <br>
+        <br>
+        <label>Licenceplate:</label>
+        <input type="text" th:field="${car.licencePlate}" >
+        <br>
+        <br>
+<!--        <label>Work done:</label>-->
+<!--        <textarea name="RepairNotes" rows="20" cols="25" th:field="${car.notes}"></textarea>-->
+        <label>Note:</label>
+        <textarea rows="5" cols="25" th:field="${car.notes}"></textarea>
+        <br>
+        <br>
 
-
-
-
-
+        <button type="submit">pres to sign car to customer</button>
     </form>
-
+    <br>
+    <br>
     <button><a href="/">Homepage</a></button>
 </div>
 </body>

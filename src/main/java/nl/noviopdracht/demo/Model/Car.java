@@ -1,11 +1,8 @@
 package nl.noviopdracht.demo.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Car {
@@ -13,21 +10,33 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int carID;
-    @NotNull
-    int OwnerID;
+
+    @ManyToOne()
+    @JoinColumn(name = "owner")
+    private User owner;
+
+
     @NotBlank
     String carBrand;
+
     @NotBlank
     String licencePlate;
 
     String notes;
 
-    public int getUserID() {
-        return OwnerID;
+    @OneToMany(mappedBy = "car")
+    private List<Repair> repairsOnCar;
+
+    public int getCarID() {
+        return carID;
     }
 
-    public void setUserID(int userID) {
-        OwnerID = userID;
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getCarBrand() {
@@ -57,11 +66,10 @@ public class Car {
     public Car() {
     }
 
-    public Car(int userID, String carBrand, String licencePlate, String notes) {
-        OwnerID = userID;
+    public Car(User user, String carBrand, String licencePlate) {
+        this.owner = user;
         this.carBrand = carBrand;
         this.licencePlate = licencePlate;
-        this.notes = notes;
     }
 
 }
