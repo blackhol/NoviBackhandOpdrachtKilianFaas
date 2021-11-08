@@ -1,11 +1,8 @@
 package nl.noviopdracht.demo.Model;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Part {
@@ -19,8 +16,31 @@ public class Part {
     @NotNull(message = "you need to fill in a price for the part")
     private float price;
 
+    @NotNull(message = "you need to fill in a amount for the part")
+    private int amount;
+
+    //Constructor
+    public Part(String partname, float price, int amount) {
+        this.partname = partname;
+        this.price = price;
+        this.amount = amount;
+    }
+
+    public Part() {
+
+    }
 
     // getters setters
+
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public String getPartname() {
         return partname;
     }
@@ -36,13 +56,7 @@ public class Part {
     public void setPrice(float price) {
         this.price = price;
     }
-    //Constructor
 
-    public Part(String partname, float price) {
-        this.partname = partname;
-        this.price = price;
-    }
 
-    public Part() {
-    }
+
 }

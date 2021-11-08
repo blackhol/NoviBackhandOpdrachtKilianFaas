@@ -1,6 +1,7 @@
 package nl.noviopdracht.demo.Controller;
 
 import nl.noviopdracht.demo.DTO.CarDTO;
+import nl.noviopdracht.demo.DTO.UserDTO;
 import nl.noviopdracht.demo.Service.CarService;
 import nl.noviopdracht.demo.Service.UserService;
 import org.springframework.stereotype.Controller;
@@ -37,14 +38,14 @@ public class CarController {
         return "car_form";
     }
     @PostMapping("/add_car")
-    public String showAddedCarForm(@Valid @ModelAttribute("car") CarDTO carDTO, BindingResult bindingResult){
+    public String showAddedCarForm(@Valid @ModelAttribute("car") CarDTO carDTO, UserDTO userDTO, BindingResult bindingResult){
         System.out.println(carDTO);
         if(bindingResult.hasErrors()){
 
             return "car_form";
         }
         else{
-            cService.saveCar(carDTO);
+            cService.saveCar(carDTO, userDTO);
             return "car_form_succes";
         }
 

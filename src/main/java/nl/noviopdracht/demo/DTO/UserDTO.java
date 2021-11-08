@@ -25,6 +25,31 @@ public class UserDTO {
 
     private String profession;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", note='" + note + '\'' +
+                ", birthday=" + birthday +
+                ", profession='" + profession + '\'' +
+                '}';
+    }
+
+    public UserDTO(Long id, String name, String email, String password, String note, Date birthday, String profession) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.note = note;
+        this.birthday = birthday;
+        this.profession = profession;
+    }
+    public UserDTO() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -83,29 +108,6 @@ public class UserDTO {
         this.profession = profession;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", note='" + note + '\'' +
-                ", birthday=" + birthday +
-                ", profession='" + profession + '\'' +
-                '}';
-    }
 
-    public UserDTO(Long id, String name, String email, String password, String note, Date birthday, String profession) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.note = note;
-        this.birthday = birthday;
-        this.profession = profession;
-    }
-    public UserDTO() {
-
-    }
 
 }

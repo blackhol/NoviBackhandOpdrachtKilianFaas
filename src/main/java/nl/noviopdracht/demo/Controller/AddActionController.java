@@ -21,24 +21,24 @@ public class AddActionController {
         this.aService = aService;
     }
 
-    @GetMapping("/add_service")
+    @GetMapping("/add_action")
     public String showserviceForm(Model model) {
         ActionDTO actionDTO = new ActionDTO();
-        model.addAttribute("part", actionDTO);
+        model.addAttribute("action", actionDTO);
 
 
-        return "addservice_form";
+        return "addaction_form";
     }
-    @PostMapping("/add_service")
+    @PostMapping("/add_action")
     public String showserviceForm(@Valid @ModelAttribute("part") ActionDTO actionDTO, BindingResult bindingResult){
         System.out.println(actionDTO);
         if(bindingResult.hasErrors()){
 
-            return "addservice_form";
+            return "addaction_form";
         }
         else{
             aService.saveAction(actionDTO);
-            return "addservice_succes";
+            return "addaction_succes";
         }
 
     }

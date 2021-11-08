@@ -14,21 +14,8 @@ public class PartDTO {
     @NotNull(message = "you need to fill in a price for the part")
     private float price;
 
-    public String getPartname() {
-        return partname;
-    }
-
-    public void setPartname(String partname) {
-        this.partname = partname;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
+    @NotNull(message = "you need to fill in a amount for the part")
+    private int amount;
 
     public PartDTO() {
 
@@ -47,4 +34,30 @@ public class PartDTO {
                 ", price=" + price +
                 '}';
     }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getPartname() {
+        return partname;
+    }
+
+    public void setPartname(String partname) {
+        this.partname = partname;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+
 }

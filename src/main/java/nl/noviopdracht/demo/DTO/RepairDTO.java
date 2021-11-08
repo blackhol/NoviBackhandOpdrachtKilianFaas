@@ -13,9 +13,23 @@ public class RepairDTO {
 
     boolean repairComfirm = false;
 
+    boolean paymentComfirm = false;
+
     ArrayList<Integer> usedparts = new ArrayList<Integer>();
 
     String notes;
+
+
+    public RepairDTO(int carID, boolean repairComfirm, ArrayList<Integer> usedparts , String notes, boolean paymentComfirm) {
+        this.carID = carID;
+        this.repairComfirm = repairComfirm;
+        this.usedparts = usedparts;
+        this.notes = notes;
+        this.paymentComfirm = paymentComfirm;
+    }
+
+    public RepairDTO() {
+    }
 
     public String getNotes() {
         return notes;
@@ -57,13 +71,11 @@ public class RepairDTO {
         this.usedparts = usedparts;
     }
 
-    public RepairDTO(int carID, boolean repairComfirm, ArrayList<Integer> usedparts , String notes) {
-        this.carID = carID;
-        this.repairComfirm = repairComfirm;
-        this.usedparts = usedparts;
-        this.notes = notes;
+    public boolean isPaymentComfirm() {
+        return paymentComfirm;
     }
 
-    public RepairDTO() {
+    public void setPaymentComfirm(boolean paymentComfirm) {
+        this.paymentComfirm = paymentComfirm;
     }
 }

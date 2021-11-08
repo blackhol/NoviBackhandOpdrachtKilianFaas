@@ -1,30 +1,37 @@
 package nl.noviopdracht.demo.DTO;
 
-import net.bytebuddy.implementation.bind.annotation.Default;
+import nl.noviopdracht.demo.Model.User;
 
-import javax.validation.constraints.NotBlank;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 
 public class CarDTO {
 
     @NotNull
     long ownerID;
-    @NotBlank
+
+    @ManyToOne()
+    @JoinColumn(name = "owner")
+    private User owner;
+
     String carBrand;
-    @NotBlank
+
     String licencePlate;
 
-    String notes;
-
-
-    public String getNotes() {
-        return notes;
+    public CarDTO() {
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public CarDTO(User owner, String carBrand, String licencePlate, long ownerID) {
+        this.owner = owner;
+        this.carBrand = carBrand;
+        this.licencePlate = licencePlate;
+        this.ownerID = ownerID;
     }
+
+    public CarDTO(int carID, String licencePlate) {
+    }
+
 
     public long getOwnerID() {
         return ownerID;
@@ -51,14 +58,4 @@ public class CarDTO {
     }
 
 
-    public CarDTO() {
-    }
-
-    public CarDTO(int userID, String carBrand,String licencePlate, String notes) {
-        ownerID = userID;
-        this.notes = notes;
-        this.carBrand = carBrand;
-        this.licencePlate = licencePlate;
-
-    }
 }

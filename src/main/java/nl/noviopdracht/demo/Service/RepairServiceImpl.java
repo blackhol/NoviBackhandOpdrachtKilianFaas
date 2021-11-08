@@ -16,7 +16,7 @@ public class RepairServiceImpl implements RepairService {
 
     @Override
     public void saveRepair(RepairDTO repairDTO) {
-        Repair repair = new Repair(repairDTO.getCarID(), repairDTO.isRepairComfirm() , repairDTO.getNotes());
+        Repair repair = new Repair(repairDTO.getCarID(), repairDTO.isRepairComfirm() , repairDTO.getNotes(), repairDTO.isRepairComfirm());
         repos.save(repair);
 
     }

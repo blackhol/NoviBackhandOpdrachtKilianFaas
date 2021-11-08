@@ -1,6 +1,7 @@
 package nl.noviopdracht.demo.DTO;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class ActionDTO {
 
@@ -9,7 +10,7 @@ public class ActionDTO {
     @NotBlank
     String name;
 
-    @NotBlank
+    @NotNull
     int price;
 
     public ActionDTO(Long ActionId, String name, int price) {

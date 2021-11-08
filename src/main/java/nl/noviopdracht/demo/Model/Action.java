@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Action {
@@ -16,7 +17,7 @@ public class Action {
     @NotBlank
     String name;
 
-    @NotBlank
+    @NotNull
     int price;
 
     public Action(Long ActionId, String name, int price) {

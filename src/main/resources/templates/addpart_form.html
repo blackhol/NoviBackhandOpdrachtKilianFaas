@@ -26,7 +26,15 @@
 
         <br>
 
-     <button type="submit">Add part</button>
+
+        <label>amount:</label>
+        <input type="text" th:field="*{amount}"/>
+        <p  class="hasErrors"  th:if="${#fields.hasErrors('amount')}" >
+            amount Error</p>
+
+        <br>
+
+        <button type="submit">Add part</button>
         <button><a href="/">Homepage</a></button>
     </form>
 </div>

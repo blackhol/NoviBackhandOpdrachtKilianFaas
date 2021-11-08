@@ -2,6 +2,7 @@ package nl.noviopdracht.demo.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Repair {
@@ -19,14 +20,16 @@ public class Repair {
 
     boolean repairComfirm = false;
 
-
+    boolean paymentComfirm = false;
 
     String notes;
 
-    public Repair( int carID, boolean repairComfirm, String notes) {
+
+    public Repair( int carID, boolean repairComfirm, String notes, boolean paymentComfirm) {
         this.carID = carID;
         this.repairComfirm = repairComfirm;
         this.notes = notes;
+        this.paymentComfirm = paymentComfirm;
     }
 
     public Repair() {
@@ -55,5 +58,13 @@ public class Repair {
 
     public void setNotes(String note) {
         this.notes = note;
+    }
+
+    public boolean isPaymentComfirm() {
+        return paymentComfirm;
+    }
+
+    public void setPaymentComfirm(boolean paymentComfirm) {
+        this.paymentComfirm = paymentComfirm;
     }
 }

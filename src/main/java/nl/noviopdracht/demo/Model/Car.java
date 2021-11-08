@@ -2,6 +2,7 @@ package nl.noviopdracht.demo.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -16,16 +17,24 @@ public class Car {
     private User owner;
 
 
-    @NotBlank
     String carBrand;
 
-    @NotBlank
     String licencePlate;
 
-    String notes;
 
-    @OneToMany(mappedBy = "car")
-    private List<Repair> repairsOnCar;
+
+    public Car() {
+    }
+
+    public Car(User owner, String carBrand, String licencePlate) {
+        this.owner = owner;
+        this.carBrand = carBrand;
+        this.licencePlate = licencePlate;
+    }
+
+    public void setCarID(int carID) {
+        this.carID = carID;
+    }
 
     public int getCarID() {
         return carID;
@@ -52,23 +61,6 @@ public class Car {
     }
 
     public void setLicencePlate(String licencePlate) {
-        this.licencePlate = licencePlate;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public Car() {
-    }
-
-    public Car(User user, String carBrand, String licencePlate) {
-        this.owner = user;
-        this.carBrand = carBrand;
         this.licencePlate = licencePlate;
     }
 

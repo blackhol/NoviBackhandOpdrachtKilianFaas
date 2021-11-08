@@ -10,9 +10,11 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class User {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotBlank(message = "You need to fill in a name")
     private String name;
 
@@ -30,6 +32,31 @@ public class User {
     private List<Car> ownedCars;
 
     private String profession;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", note='" + note + '\'' +
+                ", birthday=" + birthday +
+                ", profession='" + profession + '\'' +
+                '}';
+    }
+
+    public User( String name, String email, String password, String note, Date birthday, String profession) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.note = note;
+        this.birthday = birthday;
+        this.profession = profession;
+    }
+
+    public User() {
+
+    }
 
     public Long getId() {
         return id;
@@ -89,28 +116,5 @@ public class User {
         this.profession = profession;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", note='" + note + '\'' +
-                ", birthday=" + birthday +
-                ", profession='" + profession + '\'' +
-                '}';
-    }
 
-        public User( String name, String email, String password, String note, Date birthday, String profession) {
-            this.name = name;
-            this.email = email;
-            this.password = password;
-            this.note = note;
-            this.birthday = birthday;
-            this.profession = profession;
-        }
-
-        public User() {
-
-        }
     }
