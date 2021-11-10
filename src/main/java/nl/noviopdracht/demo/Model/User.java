@@ -33,17 +33,6 @@ public class User {
 
     private String profession;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", note='" + note + '\'' +
-                ", birthday=" + birthday +
-                ", profession='" + profession + '\'' +
-                '}';
-    }
 
     public User( String name, String email, String password, String note, Date birthday, String profession) {
         this.name = name;
@@ -57,6 +46,18 @@ public class User {
     public User() {
 
     }
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", note='" + note + '\'' +
+                ", birthday=" + birthday +
+                ", profession='" + profession + '\'' +
+                '}';
+    }
+
 
     public Long getId() {
         return id;

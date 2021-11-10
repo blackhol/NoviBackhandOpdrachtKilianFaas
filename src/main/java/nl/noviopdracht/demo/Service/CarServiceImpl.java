@@ -3,7 +3,6 @@ package nl.noviopdracht.demo.Service;
 import nl.noviopdracht.demo.DTO.CarDTO;
 import nl.noviopdracht.demo.DTO.UserDTO;
 import nl.noviopdracht.demo.Model.Car;
-import nl.noviopdracht.demo.Model.User;
 import nl.noviopdracht.demo.Repository.CarRepository;
 import nl.noviopdracht.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,9 @@ import java.util.List;
                 Car car:carsList
         )
         {
-            CarDTO carconver = new CarDTO(car.getCarID(),car.getLicencePlate());
-            carDTOList.add(carconver);
+//            CarDTO carconver = new CarDTO(car.getCarID());
+//            carconver.setCarID(car.getCarID());
+//            carDTOList.add(carconver);
         }
 
         return carDTOList;

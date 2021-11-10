@@ -1,5 +1,7 @@
 package nl.noviopdracht.demo.DTO;
 
+import nl.noviopdracht.demo.Model.OrderItem;
+
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
@@ -15,21 +17,23 @@ public class RepairDTO {
 
     boolean paymentComfirm = false;
 
-    ArrayList<Integer> usedparts = new ArrayList<Integer>();
+    ArrayList<OrderItem> useditems = new ArrayList<OrderItem>();
 
     String notes;
 
 
-    public RepairDTO(int carID, boolean repairComfirm, ArrayList<Integer> usedparts , String notes, boolean paymentComfirm) {
+    public RepairDTO(int carID, boolean repairComfirm, ArrayList<OrderItem> useditems , String notes, boolean paymentComfirm) {
         this.carID = carID;
         this.repairComfirm = repairComfirm;
-        this.usedparts = usedparts;
+        this.useditems = useditems;
         this.notes = notes;
         this.paymentComfirm = paymentComfirm;
     }
 
     public RepairDTO() {
     }
+
+
 
     public String getNotes() {
         return notes;
@@ -63,12 +67,12 @@ public class RepairDTO {
         this.repairComfirm = repairComfirm;
     }
 
-    public ArrayList<Integer> getUsedparts() {
-        return usedparts;
+    public ArrayList<OrderItem> getUseditems() {
+        return useditems;
     }
 
-    public void setUsedparts(ArrayList<Integer> usedparts) {
-        this.usedparts = usedparts;
+    public void setUseditems(ArrayList<OrderItem> useditems) {
+        this.useditems = useditems;
     }
 
     public boolean isPaymentComfirm() {

@@ -2,6 +2,7 @@ package nl.noviopdracht.demo.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,6 @@ public class Repair {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int repID;
 
-    @NotNull
     int carID;
 
     @ManyToOne()
@@ -24,16 +24,40 @@ public class Repair {
 
     String notes;
 
+    @OneToMany(mappedBy = "repair")
+    List<OrderItem> useditems;
 
-    public Repair( int carID, boolean repairComfirm, String notes, boolean paymentComfirm) {
-        this.carID = carID;
+
+    public Repair(Car car, boolean repairComfirm, boolean paymentComfirm, String notes, ArrayList<OrderItem> useditems) {
+        this.car = car;
         this.repairComfirm = repairComfirm;
-        this.notes = notes;
         this.paymentComfirm = paymentComfirm;
+        this.notes = notes;
+        this.useditems = useditems;
     }
 
     public Repair() {
 
+    }
+
+    public int getRepID() {
+        return repID;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public List<OrderItem> getUseditems() {
+        return useditems;
+    }
+
+    public void setUseditems(List<OrderItem> useditems) {
+        this.useditems = useditems;
     }
 
     public int getCarID() {

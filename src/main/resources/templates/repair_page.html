@@ -6,54 +6,14 @@
 </head>
 <body>
     <h2>Car repair job page</h2>
-    <form action="#" th:action="@{/createRepair}" method="post" th:object ="${repair}" id="repairForm">
+    <form action="#" th:action="@{/createRepair}" method="post" th:object ="${repair}">
         <lab>Car:</lab>
-        <select th:field = "*{carID}">
-            <option value="1">Hendrick Audie s6</option>
-            <option value="2">Johan Ford mustang</option>
-            <option value="3">Kilian nissan GTR</option>
+        <select  th:field = "${repair.carID}">
+            <option value="0">select car to create repairjob</option>
+            <option th:each="u : ${listofcars}" th:value="${u.carID}" th:text="${u.licencePlate}"></option>
         </select>
 
         <button type="submit">Create repair file</button>
     </form>
-
-    <br>
-<!--    <form>-->
-<!--        <label>Car:</label>-->
-<!--        <select>-->
-<!--            <option value="1">Hendrick Audie s6</option>-->
-<!--            <option value="2">Johan Ford mustang</option>-->
-<!--            <option value="3">Kilian nissan GTR</option>-->
-<!--        </select>-->
-<!--        <br>-->
-<!--        <br>-->
-
-<!--        <label>Work done:</label>-->
-<!--        <textarea name="RepairNotes" rows="20" cols="25" th:field="${repair.notes}"></textarea>-->
-
-<!--        <br>-->
-<!--        <br>-->
-
-        <label>add part:</label>
-        <select class="form-control" th:field="${repair.actionlist}"  id="dropOperator">
-            <option value="0">select part</option>
-            <option th:each="u : ${Part}" th:value="${u.id}" th:text="${u.partname}"></option>
-        </select>
-
-<!--        <br>-->
-<!--        <br>-->
-
-<!--        <label>used parts:</label>-->
-
-<!--        <br>-->
-<!--        <br>-->
-<!--        <button type="submit">save repair file</button>-->
-<!--        <br>-->
-<!--        <br>-->
-<!--        <button type="reset">clear form</button>-->
-<!--        <button><a href="/">Homepage</a></button>-->
-
-<!--    </form>-->
-
 </body>
 </html>

@@ -10,12 +10,15 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int carID;
+    long carID;
 
     @ManyToOne()
     @JoinColumn(name = "owner")
     private User owner;
 
+    @OneToMany()
+    @JoinColumn(name = "repair")
+    private List<Repair> repairs;
 
     String carBrand;
 
@@ -32,12 +35,12 @@ public class Car {
         this.licencePlate = licencePlate;
     }
 
-    public void setCarID(int carID) {
-        this.carID = carID;
+    public long getCarID() {
+        return carID;
     }
 
-    public int getCarID() {
-        return carID;
+    public void setCarID(long carID) {
+        this.carID = carID;
     }
 
     public User getOwner() {

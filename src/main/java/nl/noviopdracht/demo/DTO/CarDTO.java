@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 
 public class CarDTO {
 
+    long  carID;
+
     @NotNull
     long ownerID;
 
@@ -29,9 +31,18 @@ public class CarDTO {
         this.ownerID = ownerID;
     }
 
-    public CarDTO(int carID, String licencePlate) {
+    public CarDTO(long carID, String licencePlate) {
     }
 
+
+
+    public long getCarID() {
+        return carID;
+    }
+
+    public void setCarID(long carID) {
+        this.carID = carID;
+    }
 
     public long getOwnerID() {
         return ownerID;

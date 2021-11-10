@@ -18,7 +18,7 @@ public class Action {
     String name;
 
     @NotNull
-    int price;
+    float price;
 
     public Action(Long ActionId, String name, int price) {
         this.ActionId = ActionId;
@@ -46,7 +46,7 @@ public class Action {
     }
 
     public int getPrice() {
-        return price;
+        return (int) price;
     }
 
     public void setPrice(int price) {
