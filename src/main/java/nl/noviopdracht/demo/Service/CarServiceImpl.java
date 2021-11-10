@@ -33,9 +33,11 @@ import java.util.List;
                 Car car:carsList
         )
         {
-//            CarDTO carconver = new CarDTO(car.getCarID());
-//            carconver.setCarID(car.getCarID());
-//            carDTOList.add(carconver);
+            CarDTO carconver = new CarDTO();
+            carconver.setCarID(car.getCarID());
+            carconver.setCarBrand(car.getCarBrand());
+            carconver.setLicencePlate(car.getLicencePlate());
+            carDTOList.add(carconver);
         }
 
         return carDTOList;

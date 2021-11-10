@@ -30,6 +30,9 @@ public class CarDTO {
         this.licencePlate = licencePlate;
         this.ownerID = ownerID;
     }
+    public CarDTO(long carID,String carBrand, String licencePlate){
+
+    }
 
     public CarDTO(long carID, String licencePlate) {
     }
