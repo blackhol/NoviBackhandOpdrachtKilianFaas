@@ -1,19 +1,13 @@
-package nl.noviopdracht.demo.Model;
+package nl.noviopdracht.demo.DTO;
+
+import nl.noviopdracht.demo.Model.Repair;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Entity
-public class OrderItem {
+public class OrderItemDTO {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     long id ;
 
-    @ManyToOne
-    @JoinColumn(name = "useditems")
     Repair repair;
 
     long partId;
@@ -22,12 +16,13 @@ public class OrderItem {
 
     float price;
 
-    public OrderItem(Repair repair, long partId, float price) {
+    public OrderItemDTO(Repair repair, long partId, long actionId, float price) {
         this.repair = repair;
         this.partId = partId;
+        this.actionId = actionId;
         this.price = price;
     }
-    public OrderItem() {
+    public OrderItemDTO() {
 
     }
 

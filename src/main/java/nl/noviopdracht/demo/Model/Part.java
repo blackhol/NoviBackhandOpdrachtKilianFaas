@@ -33,6 +33,10 @@ public class Part {
     // getters setters
 
 
+    public long getId() {
+        return id;
+    }
+
     public int getAmount() {
         return amount;
     }

@@ -10,9 +10,9 @@ public class Repair {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int repID;
+    long repID;
 
-    int carID;
+    long carID;
 
     @ManyToOne()
     @JoinColumn(name = "repairing_car")
@@ -40,7 +40,10 @@ public class Repair {
 
     }
 
-    public int getRepID() {
+    public Repair(float carID, boolean repairComfirm, boolean paymentComfirm, String notes, ArrayList<OrderItem> useditems) {
+    }
+
+    public float getRepID() {
         return repID;
     }
 
@@ -60,7 +63,7 @@ public class Repair {
         this.useditems = useditems;
     }
 
-    public int getCarID() {
+    public float getCarID() {
         return carID;
     }
 

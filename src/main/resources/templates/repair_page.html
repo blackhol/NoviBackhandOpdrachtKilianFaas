@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Mechanic repair page</title>
+    <title>repair page</title>
 </head>
+
 <body>
+<div align="center">
     <h2>Car repair job page</h2>
     <form action="#" th:action="@{/createRepair}" method="post" th:object ="${repair}">
         <lab>Car:</lab>
+        <br>
         <select  th:field = "${repair.carID}">
             <option value="0">select car to create repairjob</option>
             <option th:each="u : ${listofcars}" th:value="${u.carID}" th:text="${u.licencePlate}"></option>
         </select>
-
+        <br>
         <button type="submit">Create repair file</button>
     </form>
+    <br>
+    <br>
+
+</div>
 </body>
 </html>

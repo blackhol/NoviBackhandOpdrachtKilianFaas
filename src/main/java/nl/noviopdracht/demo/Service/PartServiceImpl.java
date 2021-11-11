@@ -35,7 +35,10 @@ import java.util.List;
                 Part part:partList
         )
         {
-            PartDTO partconver = new PartDTO((long) part.getPrice(),part.getPartname(),part.getAmount());
+            PartDTO partconver = new PartDTO();
+            partconver.setId(part.getId());
+            partconver.setPartname(part.getPartname());
+            partconver.setPrice(part.getPrice());
             partDTOList.add(partconver);
         }
 

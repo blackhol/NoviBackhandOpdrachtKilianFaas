@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<label>working on car with license plate: </label>
+<div align="center">
+    <title>repair page</title>
+
+    <label>test tekst</label>
+    <form action="#" th:action="@{/add_part_to_repair}" method="post" th:object ="${usingpart}">
+        <lab>parts using for repair:</lab>
+        <br>
+        <select th:field = "${usingpart.partId}">
+            <option value="0">select part to add to repair</option>
+            <option th:each="u : ${parts}" th:value="${u.id}" th:text="${u.partname}"></option>
+        </select>
+        <br>
+        <button type="submit">pres here to add the part to the list of used parts</button>
+    </form>
+</div>
+</body>
+</html>

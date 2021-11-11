@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class RepairDTO {
 
     @NotNull
-    int repID;
+    long repID;
 
     @NotNull
-    int carID;
+    float carID;
 
     boolean repairComfirm = false;
 
@@ -22,7 +22,7 @@ public class RepairDTO {
     String notes;
 
 
-    public RepairDTO(int carID, boolean repairComfirm, ArrayList<OrderItem> useditems , String notes, boolean paymentComfirm) {
+    public RepairDTO(float carID, boolean repairComfirm, ArrayList<OrderItem> useditems , String notes, boolean paymentComfirm) {
         this.carID = carID;
         this.repairComfirm = repairComfirm;
         this.useditems = useditems;
@@ -43,19 +43,20 @@ public class RepairDTO {
         this.notes = notes;
     }
 
-    public int getRepID() {
+    public float getRepID() {
         return repID;
     }
 
-    public void setRepID(int repID) {
+    public void setRepID(long repID) {
         this.repID = repID;
     }
 
-    public int getCarID() {
+    public float getCarID() {
         return carID;
     }
 
-    public void setCarID(int carID) {
+
+    public void setCarID(float carID) {
         this.carID = carID;
     }
 
