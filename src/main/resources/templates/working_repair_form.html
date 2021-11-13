@@ -12,10 +12,12 @@
     <title>repair page</title>
 
     <label>test tekst</label>
-    <form action="#" th:action="@{/add_part_to_repair}" method="post" th:object ="${usingpart}">
+    <form action="#" th:action="@{/add_part_to_repair}" method="post" th:object ="${Partinuse}">
         <lab>parts using for repair:</lab>
         <br>
-        <select th:field = "${usingpart.partId}">
+<!--        <select id="Partinuse" name="Partinuse">-->
+
+                <select th:field = "*{partId}">
             <option value="0">select part to add to repair</option>
             <option th:each="u : ${parts}" th:value="${u.id}" th:text="${u.partname}"></option>
         </select>

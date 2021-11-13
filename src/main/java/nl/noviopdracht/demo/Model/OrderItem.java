@@ -31,6 +31,11 @@ public class OrderItem {
 
     }
 
+    public OrderItem(Long partId, float price) {
+        this.partId = partId;
+        this.price = price;
+    }
+
     public long getId() {
         return id;
     }

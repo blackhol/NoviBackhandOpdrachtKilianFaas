@@ -8,7 +8,6 @@ import nl.noviopdracht.demo.Model.OrderItem;
 public interface RepairService {
     public long saveRepair(RepairDTO repairDTO,CarDTO carDTO);
 
-    public void saveOrderItem(RepairDTO repairDTO, PartDTO partDTO);
 
 
 }

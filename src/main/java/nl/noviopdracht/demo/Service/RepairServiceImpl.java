@@ -14,13 +14,11 @@ import org.springframework.stereotype.Service;
 public class RepairServiceImpl implements RepairService {
     private final RepairRepository repos;
     private final CarRepository carRepository;
-    private final RepairRepository repairRepository;
 
     @Autowired
     public RepairServiceImpl(RepairRepository repos, CarRepository carRepository, RepairRepository repairRepository) {
         this.repos = repos;
         this.carRepository = carRepository;
-        this.repairRepository = repairRepository;
     }
 
     @Override
@@ -30,10 +28,5 @@ public class RepairServiceImpl implements RepairService {
 
         return (long) repair.getRepID();
     }
-    @Override
-    public void saveOrderItem( RepairDTO repairDTO, PartDTO partDTO){
-        OrderItem orderItem = new OrderItem(repairRepository.getById((long) repairDTO.getRepID()),partDTO.getId(),partDTO.getPrice());
-       // repos.save(orderItem);
 
-    }
 }
