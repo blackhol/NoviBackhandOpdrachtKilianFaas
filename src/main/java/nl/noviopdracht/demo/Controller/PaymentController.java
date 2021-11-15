@@ -9,10 +9,7 @@ public class PaymentController {
 
     @GetMapping("/paymentpage")
     public String showPaymentPage(Model model) {
-        String testtekst = "dit is een test";
-        model.addAttribute("tekst", testtekst);
-        //model.addAttribute("prijsEXL",PrijsEXL);
-        //model.addAttribute("prijsINCL",PrijsINCL);
+
 
 
 

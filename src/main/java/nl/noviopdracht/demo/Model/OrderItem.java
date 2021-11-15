@@ -12,9 +12,8 @@ public class OrderItem {
     @Column(name = "id")
     long id ;
 
-    @ManyToOne
-    @JoinColumn(name = "useditems")
-    Repair repair;
+
+    long repairID;
 
     long partId;
 
@@ -22,8 +21,8 @@ public class OrderItem {
 
     float price;
 
-    public OrderItem(Repair repair, long partId, float price) {
-        this.repair = repair;
+    public OrderItem(long repairID, long partId, float price) {
+        this.repairID = repairID;
         this.partId = partId;
         this.price = price;
     }
@@ -31,9 +30,11 @@ public class OrderItem {
 
     }
 
-    public OrderItem(Long partId, float price) {
+    public OrderItem(Long partId, float price, long repairID,Long actionId) {
         this.partId = partId;
         this.price = price;
+        this.repairID = repairID;
+        this.actionId = actionId;
     }
 
     public long getId() {
@@ -44,12 +45,12 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Repair getRepair() {
-        return repair;
+    public long getRepairID() {
+        return repairID;
     }
 
-    public void setRepair(Repair repair) {
-        this.repair = repair;
+    public void setRepairID(long repairID) {
+        this.repairID = repairID;
     }
 
     public long getPartId() {

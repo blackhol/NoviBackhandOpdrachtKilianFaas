@@ -8,7 +8,7 @@ public class OrderItemDTO {
 
     long id ;
 
-    Repair repair;
+    long repairID;
 
     long partId;
 
@@ -16,8 +16,8 @@ public class OrderItemDTO {
 
     float price;
 
-    public OrderItemDTO(Repair repair, long partId, long actionId, float price) {
-        this.repair = repair;
+    public OrderItemDTO(long repairID, long partId, long actionId, float price) {
+        this.repairID = repairID;
         this.partId = partId;
         this.actionId = actionId;
         this.price = price;
@@ -36,12 +36,12 @@ public class OrderItemDTO {
         this.id = id;
     }
 
-    public Repair getRepair() {
-        return repair;
+    public long getRepairID() {
+        return repairID;
     }
 
-    public void setRepair(Repair repair) {
-        this.repair = repair;
+    public void setRepairID(long repairID) {
+        this.repairID = repairID;
     }
 
     public long getPartId() {

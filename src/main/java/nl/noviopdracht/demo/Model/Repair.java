@@ -12,8 +12,6 @@ public class Repair {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long repID;
 
-    long carID;
-
     @ManyToOne()
     @JoinColumn(name = "repairing_car")
     private Car car;
@@ -22,18 +20,13 @@ public class Repair {
 
     boolean paymentComfirm = false;
 
-    String notes;
+    ArrayList<Long>usedpartID = new ArrayList<Long>();
 
-    @OneToMany(mappedBy = "repair")
-    List<OrderItem> useditems;
-
-
-    public Repair(Car car, boolean repairComfirm, boolean paymentComfirm, String notes, ArrayList<OrderItem> useditems) {
+    public Repair(Car car, boolean repairComfirm, boolean paymentComfirm, ArrayList<Long> usedpartID) {
         this.car = car;
         this.repairComfirm = repairComfirm;
         this.paymentComfirm = paymentComfirm;
-        this.notes = notes;
-        this.useditems = useditems;
+        this.usedpartID = usedpartID;
     }
 
     public Repair() {
@@ -42,6 +35,9 @@ public class Repair {
 
     public Repair(float carID, boolean repairComfirm, boolean paymentComfirm, String notes, ArrayList<OrderItem> useditems) {
     }
+
+//    public Repair(Car byId, boolean repairComfirm, boolean paymentComfirm, String notes, ArrayList<Long> usedpartID) {
+//    }
 
     public float getRepID() {
         return repID;
@@ -55,20 +51,12 @@ public class Repair {
         this.car = car;
     }
 
-    public List<OrderItem> getUseditems() {
-        return useditems;
+    public ArrayList<Long> getUsedpartID() {
+        return usedpartID;
     }
 
-    public void setUseditems(List<OrderItem> useditems) {
-        this.useditems = useditems;
-    }
-
-    public float getCarID() {
-        return carID;
-    }
-
-    public void setCarID(int carID) {
-        this.carID = carID;
+    public void setUsedpartID(ArrayList<Long> usedpartID) {
+        this.usedpartID = usedpartID;
     }
 
     public boolean isRepairComfirm() {
@@ -77,14 +65,6 @@ public class Repair {
 
     public void setRepairComfirm(boolean repairComfirm) {
         this.repairComfirm = repairComfirm;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String note) {
-        this.notes = note;
     }
 
     public boolean isPaymentComfirm() {

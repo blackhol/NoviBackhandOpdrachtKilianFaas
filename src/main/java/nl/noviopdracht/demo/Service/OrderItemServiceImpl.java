@@ -1,5 +1,6 @@
 package nl.noviopdracht.demo.Service;
 
+import nl.noviopdracht.demo.DTO.ActionDTO;
 import nl.noviopdracht.demo.DTO.OrderItemDTO;
 import nl.noviopdracht.demo.DTO.PartDTO;
 import nl.noviopdracht.demo.DTO.RepairDTO;
@@ -23,11 +24,9 @@ public class OrderItemServiceImpl implements OrderItemService {
 
 
     @Override
-    public void saveOrderItem(RepairDTO repairDTO, PartDTO partDTO, OrderItemDTO orderItemDTO){
-        //Repair repair = new Repair(repairDTO.getRepID(),repairDTO.isRepairComfirm(),repairDTO.isPaymentComfirm(),repairDTO.getNotes(),repairDTO.getUseditems());
-        OrderItem orderItem = new OrderItem(orderItemDTO.getPartId(),partDTO.getPrice());
-        // OrderItem orderItem = new OrderItem(partDTO.getId(),partDTO.getPrice());
-//        OrderItem orderItem = new OrderItem(repairRepository.getById((long) repairDTO.getRepID()),partDTO.getId(),partDTO.getPrice());
+    public void saveOrderItem(RepairDTO repairDTO, PartDTO partDTO, OrderItemDTO orderItemDTO, ActionDTO actionDTO){
+
+        OrderItem orderItem = new OrderItem(orderItemDTO.getPartId(),orderItemDTO.getPrice(),orderItemDTO.getRepairID(),orderItemDTO.getActionId());
         orderItemRepository.save(orderItem);
 
     }

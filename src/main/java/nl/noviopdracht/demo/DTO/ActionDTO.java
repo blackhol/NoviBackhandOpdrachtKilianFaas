@@ -45,4 +45,8 @@ public class ActionDTO {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public void setActionId(Long actionId) {
+        ActionId = actionId;
+    }
 }

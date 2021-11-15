@@ -10,37 +10,23 @@ public class RepairDTO {
     @NotNull
     long repID;
 
-    @NotNull
     float carID;
 
     boolean repairComfirm = false;
 
     boolean paymentComfirm = false;
 
-    ArrayList<OrderItem> useditems = new ArrayList<OrderItem>();
-
-    String notes;
+    ArrayList<Long> usedpartID = new ArrayList<Long>();
 
 
-    public RepairDTO(float carID, boolean repairComfirm, ArrayList<OrderItem> useditems , String notes, boolean paymentComfirm) {
+    public RepairDTO(float carID, boolean repairComfirm, boolean paymentComfirm,ArrayList<Long> usedpartID) {
         this.carID = carID;
         this.repairComfirm = repairComfirm;
-        this.useditems = useditems;
-        this.notes = notes;
         this.paymentComfirm = paymentComfirm;
+        this.usedpartID = usedpartID;
     }
 
     public RepairDTO() {
-    }
-
-
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
     }
 
     public float getRepID() {
@@ -68,12 +54,12 @@ public class RepairDTO {
         this.repairComfirm = repairComfirm;
     }
 
-    public ArrayList<OrderItem> getUseditems() {
-        return useditems;
+    public ArrayList<Long> getUsedpartID() {
+        return usedpartID;
     }
 
-    public void setUseditems(ArrayList<OrderItem> useditems) {
-        this.useditems = useditems;
+    public void setUsedpartID(ArrayList<Long> usedpartID) {
+        this.usedpartID = usedpartID;
     }
 
     public boolean isPaymentComfirm() {

@@ -1,20 +1,16 @@
 package nl.noviopdracht.demo.Controller;
 
-import nl.noviopdracht.demo.DTO.CarDTO;
-import nl.noviopdracht.demo.DTO.OrderItemDTO;
-import nl.noviopdracht.demo.DTO.PartDTO;
-import nl.noviopdracht.demo.DTO.RepairDTO;
-import nl.noviopdracht.demo.Model.OrderItem;
+import nl.noviopdracht.demo.DTO.*;
 import nl.noviopdracht.demo.Model.Part;
-import nl.noviopdracht.demo.Service.CarService;
-import nl.noviopdracht.demo.Service.OrderItemService;
-import nl.noviopdracht.demo.Service.PartService;
-import nl.noviopdracht.demo.Service.RepairService;
+import nl.noviopdracht.demo.Service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.ArrayList;
 
 @Controller
 public class RepairController {
@@ -23,21 +19,21 @@ public class RepairController {
     private final PartService pservice;
     private final CarService carService;
     private final OrderItemService orderItemService;
+    private final ActionService actionService;
 
 
-    public RepairController(RepairService rService, PartService pservice, CarService carService, OrderItemService orderItemService) {
+    public RepairController(RepairService rService, PartService pservice, CarService carService, OrderItemService orderItemService, ActionService actionService) {
         this.rService = rService;
         this.pservice = pservice;
         this.carService = carService;
         this.orderItemService = orderItemService;
+        this.actionService = actionService;
     }
 
     @GetMapping("/repair")
     public String showRepairPage(Model model){
 
-//        OrderItem orderItem = new OrderItem();
         RepairDTO repairDTO = new RepairDTO();
-//        Part part = new Part();
         OrderItemDTO orderItemDTO = new OrderItemDTO();
 
 
@@ -46,6 +42,8 @@ public class RepairController {
         model.addAttribute("parts", pservice.getAllParts());
         model.addAttribute("listofcars",carService.getAllCars());
         model.addAttribute("Partinuse",orderItemDTO);
+        model.addAttribute("actions",actionService.getAllActions());
+
 
         return "repair_page";
     }
@@ -54,27 +52,48 @@ public class RepairController {
     public String createRepair(Model model, @ModelAttribute("repair") RepairDTO repairDTO, CarDTO carDTO,Part part,OrderItemDTO orderItemDTO){
         System.out.println(repairDTO);
 
-//        OrderItem orderItem = new OrderItem();
-
         long repId = rService.saveRepair(repairDTO, carDTO);
         repairDTO.setRepID(repId);
+
+        System.out.println("repair id ="+ repairDTO.getRepID());
+
+        model.addAttribute("repairId",repId);
+
+        model.addAttribute("repair" , repairDTO);
         model.addAttribute("parts", pservice.getAllParts());
         model.addAttribute("listofcars",carService.getAllCars());
         model.addAttribute("Partinuse",orderItemDTO);
+        model.addAttribute("actions",actionService.getAllActions());
+
+
 
         return "working_repair_form";
     }
 
-    @PostMapping("/add_part_to_repair")
-    public String addPartsToRepair(Model model, @ModelAttribute("repair") RepairDTO repairDTO,Part part,OrderItemDTO orderItemDTO){
+    @PostMapping("/add_part_to_repair/{repairId}")
+    public String addPartsToRepair(Model model, @PathVariable long repairId, @ModelAttribute("repair") RepairDTO repairDTO, Part part, OrderItemDTO orderItemDTO){
         PartDTO partDTO = new PartDTO();
+        ActionDTO actionDTO = new ActionDTO();
+
+        ArrayList<ActionDTO> actionDTOArrayList = actionService.getAllActions();
+        ArrayList<PartDTO> partArrayList = pservice.getAllParts();
+
+        model.addAttribute("repair" , repairDTO);
         model.addAttribute("parts", pservice.getAllParts());
         model.addAttribute("listofcars",carService.getAllCars());
         model.addAttribute("Partinuse",orderItemDTO);
+        model.addAttribute("actions",actionService.getAllActions());
 
-        System.out.println(" PART ID = "+orderItemDTO.getPartId());
-        //PartDTO partDTO = new PartDTO(part.getId(), part.getPartname(),part.getPrice());
-        orderItemService.saveOrderItem(repairDTO, partDTO,orderItemDTO);
+        orderItemDTO.setRepairID(repairId);
+
+        orderItemDTO.setPrice(partArrayList.get((int) orderItemDTO.getPartId()).getPrice());
+        orderItemDTO.setPrice(actionDTOArrayList.get((int) orderItemDTO.getActionId()).getPrice());
+
+        orderItemService.saveOrderItem(repairDTO, partDTO,orderItemDTO,actionDTO);
+
+        //reset for next part/action
+        orderItemDTO.setActionId(0);
+        orderItemDTO.setPartId(0);
 
         return"working_repair_form";
     }
