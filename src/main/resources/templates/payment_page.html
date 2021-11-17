@@ -6,25 +6,18 @@
 
 </head>
 <body>
+<div align="center">
+    <label>select repair to pay</label>
+    <form action="#" th:action="@{/pay_repair}" method="get" th:object="${selectedRepair}" >
+        <select th:field="*{repID}">
+            <option value="0">select repair</option>
+            <option th:each="u : ${repairList}" th:value="${u.repID}" th:text="${u.repID}"></option>
+        </select>
+        <button type="submit">click to recive receipts</button>
+    </form>
 
-<!--    <select class="form-control" th:field="${repair.repID}"  id="dropOperator">-->
-<!--        <option value="0">select repair to pay</option>-->
-<!--        <option th:each="u : ${Repairs}" th:value="${u.id}" th:text="${u.id}"></option>-->
-<!--    </select>-->
 <br>
 <br>
-
-<label>total price of repair EXCL taxes</label>
-<br>
-
-<p><span th:text="|${prijsEXL}|"></span></p>
-<br>
-
-<label>total price of repair INCL taxes</label>
-<br>
-
-<p><span th:text="|${prijsINCL}|"></span></p>
-
-
+</div>
 </body>
 </html>

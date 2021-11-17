@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class RepairDTO {
 
-    @NotNull
     long repID;
 
     float carID;
@@ -16,20 +15,23 @@ public class RepairDTO {
 
     boolean paymentComfirm = false;
 
-    ArrayList<Long> usedpartID = new ArrayList<Long>();
+//    ArrayList<Long> usedpartID = new ArrayList<Long>();
 
 
-    public RepairDTO(float carID, boolean repairComfirm, boolean paymentComfirm,ArrayList<Long> usedpartID) {
+    public RepairDTO(long repID,float carID, boolean repairComfirm, boolean paymentComfirm
+//            ,ArrayList<Long> usedpartID
+    ) {
+        this.repID = repID;
         this.carID = carID;
         this.repairComfirm = repairComfirm;
         this.paymentComfirm = paymentComfirm;
-        this.usedpartID = usedpartID;
+//        this.usedpartID = usedpartID;
     }
 
     public RepairDTO() {
     }
 
-    public float getRepID() {
+    public long getRepID() {
         return repID;
     }
 
@@ -40,7 +42,6 @@ public class RepairDTO {
     public float getCarID() {
         return carID;
     }
-
 
     public void setCarID(float carID) {
         this.carID = carID;
@@ -54,14 +55,6 @@ public class RepairDTO {
         this.repairComfirm = repairComfirm;
     }
 
-    public ArrayList<Long> getUsedpartID() {
-        return usedpartID;
-    }
-
-    public void setUsedpartID(ArrayList<Long> usedpartID) {
-        this.usedpartID = usedpartID;
-    }
-
     public boolean isPaymentComfirm() {
         return paymentComfirm;
     }
@@ -69,4 +62,12 @@ public class RepairDTO {
     public void setPaymentComfirm(boolean paymentComfirm) {
         this.paymentComfirm = paymentComfirm;
     }
+
+//    public ArrayList<Long> getUsedpartID() {
+//        return usedpartID;
+//    }
+//
+//    public void setUsedpartID(ArrayList<Long> usedpartID) {
+//        this.usedpartID = usedpartID;
+//    }
 }

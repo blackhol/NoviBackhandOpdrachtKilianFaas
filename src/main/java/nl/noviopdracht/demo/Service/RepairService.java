@@ -10,6 +10,6 @@ import java.util.ArrayList;
 public interface RepairService {
     public long saveRepair(RepairDTO repairDTO,CarDTO carDTO);
 
-//    public ArrayList<Long> getAllRepairs();
+    public ArrayList<RepairDTO> getAllRepairs();
 
 }

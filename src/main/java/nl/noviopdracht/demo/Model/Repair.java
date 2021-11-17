@@ -20,13 +20,15 @@ public class Repair {
 
     boolean paymentComfirm = false;
 
-    ArrayList<Long>usedpartID = new ArrayList<Long>();
+//    ArrayList<Long> usedpartID = new ArrayList<Long>();
 
-    public Repair(Car car, boolean repairComfirm, boolean paymentComfirm, ArrayList<Long> usedpartID) {
+    public Repair(Car car, boolean repairComfirm, boolean paymentComfirm
+//            , ArrayList<Long> usedpartID
+    ) {
         this.car = car;
         this.repairComfirm = repairComfirm;
         this.paymentComfirm = paymentComfirm;
-        this.usedpartID = usedpartID;
+//        this.usedpartID = usedpartID;
     }
 
     public Repair() {
@@ -51,13 +53,13 @@ public class Repair {
         this.car = car;
     }
 
-    public ArrayList<Long> getUsedpartID() {
-        return usedpartID;
-    }
-
-    public void setUsedpartID(ArrayList<Long> usedpartID) {
-        this.usedpartID = usedpartID;
-    }
+//    public ArrayList<Long> getUsedpartID() {
+//        return usedpartID;
+//    }
+//
+//    public void setUsedpartID(ArrayList<Long> usedpartID) {
+//        this.usedpartID = usedpartID;
+//    }
 
     public boolean isRepairComfirm() {
         return repairComfirm;
