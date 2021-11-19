@@ -1,7 +1,6 @@
 package nl.noviopdracht.demo.Model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class OrderItem {
