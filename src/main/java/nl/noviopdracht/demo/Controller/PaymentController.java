@@ -1,9 +1,14 @@
 package nl.noviopdracht.demo.Controller;
 
+import nl.noviopdracht.demo.DTO.ActionDTO;
 import nl.noviopdracht.demo.DTO.OrderItemDTO;
+import nl.noviopdracht.demo.DTO.PartDTO;
 import nl.noviopdracht.demo.DTO.RepairDTO;
+import nl.noviopdracht.demo.Model.RegisterItem;
 import nl.noviopdracht.demo.Model.Repair;
+import nl.noviopdracht.demo.Service.ActionService;
 import nl.noviopdracht.demo.Service.OrderItemService;
+import nl.noviopdracht.demo.Service.PartService;
 import nl.noviopdracht.demo.Service.RepairService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +22,14 @@ import java.util.ArrayList;
 public class PaymentController {
     private final RepairService repairService;
     private final OrderItemService orderItemService;
+    private final PartService partService;
+    private final ActionService actionService;
 
-    public PaymentController(RepairService repairService, OrderItemService orderItemService) {
+    public PaymentController(RepairService repairService, OrderItemService orderItemService, PartService partService, ActionService actionService) {
         this.repairService = repairService;
         this.orderItemService = orderItemService;
+        this.partService = partService;
+        this.actionService = actionService;
     }
 
     @GetMapping("/paymentpage")
@@ -45,22 +54,45 @@ public class PaymentController {
         Double PriceINCL = new Double(0);
         Float PriceEXCL = new Float(0);
 
+        ArrayList<PartDTO> listofparts = partService.getAllParts();
+        ArrayList<ActionDTO> listofactions = actionService.getAllActions();
+
         for (
                 OrderItemDTO orderitem : allOrderItems
             )
         {
-//            Long checkrepid = orderitem.getRepairID();
             Long checkrepid = repairId;
 
             System.out.println(checkrepid);
-//            if (checkrepid == orderitem.getRepairID()){
-//                repairIdOrderItems.add(orderitem);
-//            }
+
             if (checkrepid.equals(orderitem.getRepairID())){
                 repairIdOrderItems.add(orderitem);
                 PriceEXCL += orderitem.getPrice();
             }
-            model.addAttribute("alluseditems",repairIdOrderItems);
+
+
+            ArrayList<RegisterItem> registerlist = new ArrayList<>();
+            for (
+                    OrderItemDTO orderitemDTO:repairIdOrderItems
+                 )
+            {
+                RegisterItem registerItemconver = new RegisterItem();
+                if(orderitemDTO.getPartId() > 0){
+                    registerItemconver.setName((listofparts.get((int) orderitem.getPartId()).getPartname()));
+                    registerItemconver.setPrice((listofparts.get((int) orderitem.getPartId()).getPrice()));
+                    registerlist.add(registerItemconver);
+
+                }
+                if(orderitemDTO.getActionId() > 0){
+                    registerItemconver.setName(listofactions.get((int) orderitem.getActionId()).getName());
+                    registerItemconver.setPrice(listofactions.get((int) orderitem.getActionId()).getPrice());
+                    registerlist.add(registerItemconver);
+                }
+
+
+            }
+
+            model.addAttribute("alluseditems",registerlist);
             model.addAttribute("payingrepair", repair);
             model.addAttribute("priceEXCL",PriceEXCL);
             PriceINCL = PriceEXCL * 1.21;
