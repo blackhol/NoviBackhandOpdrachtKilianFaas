@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>callcustomerpage</title>
+</head>
+<body>
+<div align="center">
+    <div class="container">
+        <div class="row">
+            <div>
+                <table id="example" class="table table-borderd">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Cellnumber</th>
+                        <th>carid</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="users : ${calllist}">
+
+                        <td th:text="${users.username}">Name</td>
+                        <td th:text="${users.cellnumber}">Cellnumber</td>
+                        <td th:text="${users.carid}">carID</td>
+                        <td>
+                            <ul>
+                                <li>
+                                   <input type="button" value="agree" th:action="@{/setagree}">
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button><a href="/">main menu</a></button>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

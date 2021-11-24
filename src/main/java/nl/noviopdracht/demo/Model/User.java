@@ -31,21 +31,36 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Car> ownedCars;
 
+    private String cellnumber;
+    
     private String profession;
 
-
-    public User( String name, String email, String password, String note, Date birthday, String profession) {
+    public User( String name, String email, String password, String note, Date birthday, List<Car> ownedCars, String cellnumber, String profession) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.note = note;
         this.birthday = birthday;
+        this.ownedCars = ownedCars;
+        this.cellnumber = cellnumber;
         this.profession = profession;
     }
 
     public User() {
 
     }
+
+    public User(String name, String email, String password, String note, Date birthday, String cellnumber, String profession) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.note = note;
+        this.birthday = birthday;
+        this.cellnumber = cellnumber;
+        this.profession = profession;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -117,5 +132,19 @@ public class User {
         this.profession = profession;
     }
 
-
+    public List<Car> getOwnedCars() {
+        return ownedCars;
     }
+
+    public void setOwnedCars(List<Car> ownedCars) {
+        this.ownedCars = ownedCars;
+    }
+
+    public String getCellnumber() {
+        return cellnumber;
+    }
+
+    public void setCellnumber(String cellnumber) {
+        this.cellnumber = cellnumber;
+    }
+}

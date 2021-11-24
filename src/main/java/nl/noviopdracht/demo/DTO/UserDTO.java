@@ -1,5 +1,7 @@
 package nl.noviopdracht.demo.DTO;
 
+import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
+
 import javax.validation.constraints.NotBlank;
 
 
@@ -22,6 +24,7 @@ public class UserDTO {
 
     private Date birthday;
 
+    private String cellnumber;
 
     private String profession;
 
@@ -37,15 +40,29 @@ public class UserDTO {
                 '}';
     }
 
-    public UserDTO(Long id, String name, String email, String password, String note, Date birthday, String profession) {
-        this.id = id;
+    public UserDTO(Long id, String name, String email, String password, String note, Date birthday, String cellnumber, String profession) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.note = note;
         this.birthday = birthday;
+        this.cellnumber = cellnumber;
+        this.profession = profession;
+
+
+    }
+
+
+    public UserDTO(String name, String email, String password, String note, Date birthday, String cellnumber, String profession) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.note = note;
+        this.birthday = birthday;
+        this.cellnumber = cellnumber;
         this.profession = profession;
     }
+
     public UserDTO() {
 
     }
@@ -108,6 +125,11 @@ public class UserDTO {
         this.profession = profession;
     }
 
+    public String getCellnumber() {
+        return cellnumber;
+    }
 
-
+    public void setCellnumber(String cellnumber) {
+        this.cellnumber = cellnumber;
+    }
 }

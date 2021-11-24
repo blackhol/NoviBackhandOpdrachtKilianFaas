@@ -7,11 +7,13 @@ import nl.noviopdracht.demo.Repository.CarRepository;
 import nl.noviopdracht.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
     public class CarServiceImpl implements CarService {
     private final CarRepository repos;
     private final UserRepository userRepository;
@@ -37,6 +39,7 @@ import java.util.List;
             carconver.setCarID(car.getCarID());
             carconver.setCarBrand(car.getCarBrand());
             carconver.setLicencePlate(car.getLicencePlate());
+            carconver.setOwnerID(car.getOwner().getId());
             carDTOList.add(carconver);
         }
 

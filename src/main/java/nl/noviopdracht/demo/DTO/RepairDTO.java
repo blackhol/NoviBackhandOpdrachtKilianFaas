@@ -1,9 +1,6 @@
 package nl.noviopdracht.demo.DTO;
 
-import nl.noviopdracht.demo.Model.OrderItem;
 
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 
 public class RepairDTO {
 
@@ -15,17 +12,17 @@ public class RepairDTO {
 
     boolean paymentComfirm = false;
 
-//    ArrayList<Long> usedpartID = new ArrayList<Long>();
+    boolean agree_on_repiar = false;
+
+    String pickUpDate;
 
 
     public RepairDTO(long repID,float carID, boolean repairComfirm, boolean paymentComfirm
-//            ,ArrayList<Long> usedpartID
     ) {
         this.repID = repID;
         this.carID = carID;
         this.repairComfirm = repairComfirm;
         this.paymentComfirm = paymentComfirm;
-//        this.usedpartID = usedpartID;
     }
 
     public RepairDTO() {
@@ -63,11 +60,19 @@ public class RepairDTO {
         this.paymentComfirm = paymentComfirm;
     }
 
-//    public ArrayList<Long> getUsedpartID() {
-//        return usedpartID;
-//    }
-//
-//    public void setUsedpartID(ArrayList<Long> usedpartID) {
-//        this.usedpartID = usedpartID;
-//    }
+    public boolean isAgree_on_repiar() {
+        return agree_on_repiar;
+    }
+
+    public void setAgree_on_repiar(boolean agree_on_repiar) {
+        this.agree_on_repiar = agree_on_repiar;
+    }
+
+    public String getPickUpDate() {
+        return pickUpDate;
+    }
+
+    public void setPickUpDate(String pickUpDate) {
+        this.pickUpDate = pickUpDate;
+    }
 }

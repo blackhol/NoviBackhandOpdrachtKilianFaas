@@ -24,9 +24,7 @@ public class RepairServiceImpl implements RepairService {
 
     @Override
     public long saveRepair(RepairDTO repairDTO, CarDTO carDTO) {
-        Repair repair = new Repair(carRepository.getById(carDTO.getCarID()),repairDTO.isRepairComfirm(),repairDTO.isPaymentComfirm()
-//                ,repairDTO.getUsedpartID()
-        );
+        Repair repair = new Repair(carRepository.getById(carDTO.getCarID()),repairDTO.isRepairComfirm(),repairDTO.isPaymentComfirm());
         repos.save(repair);
 
         return (long) repair.getRepID();
@@ -51,5 +49,13 @@ public class RepairServiceImpl implements RepairService {
         }
         return repairDTOList;
     }
+
+    @Override
+    public void updateAgreeRepairBoolean(boolean agree, long repairID) {
+        Repair repair = repos.findById(repairID);
+        repair.setAgree_on_repiar(agree);
+        repos.save(repair);
+    }
+
 
 }

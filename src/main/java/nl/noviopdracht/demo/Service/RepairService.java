@@ -12,4 +12,8 @@ public interface RepairService {
 
     public ArrayList<RepairDTO> getAllRepairs();
 
+    public void updateAgreeRepairBoolean(boolean agree,long repairID);
+
+
+
 }

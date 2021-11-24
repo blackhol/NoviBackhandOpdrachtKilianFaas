@@ -27,7 +27,7 @@ import java.util.List;
                 User user:usersList
         )
         {
-                UserDTO userconver = new UserDTO(user.getId() ,user.getName(), user.getEmail(), user.getPassword(), user.getNote() , user.getBirthday() , user.getProfession());
+                UserDTO userconver = new UserDTO(user.getId() ,user.getName(), user.getEmail(), user.getPassword(), user.getNote() , user.getBirthday(),user.getCellnumber() , user.getProfession());
                 userDTOList.add(userconver);
         }
 
@@ -36,7 +36,7 @@ import java.util.List;
 
     @Override
     public void saveUser( UserDTO userDTO) {
-        User user = new User(userDTO.getName(),userDTO.getEmail(),userDTO.getPassword(),userDTO.getNote(),userDTO.getBirthday(),userDTO.getProfession());
+        User user = new User(userDTO.getName(),userDTO.getEmail(),userDTO.getPassword(),userDTO.getNote(),userDTO.getBirthday(),userDTO.getProfession(),userDTO.getCellnumber());
         repos.save(user);
     }
 
