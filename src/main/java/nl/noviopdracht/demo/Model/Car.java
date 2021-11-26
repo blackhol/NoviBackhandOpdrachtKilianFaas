@@ -3,8 +3,6 @@ package nl.noviopdracht.demo.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,8 @@ public class Car implements Serializable {
     @ManyToOne()
     @JoinColumn(name = "owner")
     private User owner;
+
+    Long ownerID;
 
     @OneToMany()
     @JoinColumn(name = "repair")
@@ -39,6 +39,13 @@ public class Car implements Serializable {
 
     public Car(User owner, String carBrand, String licencePlate) {
         this.owner = owner;
+        this.carBrand = carBrand;
+        this.licencePlate = licencePlate;
+    }
+
+    public Car(User owner, Long ownerID, String carBrand, String licencePlate) {
+        this.owner = owner;
+        this.ownerID = ownerID;
         this.carBrand = carBrand;
         this.licencePlate = licencePlate;
     }
@@ -97,5 +104,13 @@ public class Car implements Serializable {
 
     public void setRemoveImages(List<String> removeImages) {
         this.removeImages = removeImages;
+    }
+
+    public Long getOwnerID() {
+        return ownerID;
+    }
+
+    public void setOwnerID(Long ownerID) {
+        this.ownerID = ownerID;
     }
 }

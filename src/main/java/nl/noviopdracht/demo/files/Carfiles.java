@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user_files")
+@Table(name = "car_files")
 public class Carfiles implements Serializable {
 
     @Id
@@ -19,7 +19,7 @@ public class Carfiles implements Serializable {
     @Column(name = "file_extension")
     private String fileExtension;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "car_id")
     private Car car;
 
     public Long getId() {

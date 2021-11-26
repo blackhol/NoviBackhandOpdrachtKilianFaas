@@ -7,70 +7,155 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awsome/4.7.0/css/font-awsome.css">
+    <style>
+        .imagecontainer {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .overlay {
+            position: absolute;;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .3s ease;
+            border-radius: 50%;
+        }
+
+        .imagecontainer:hover.overlay {
+            opacity: 1;
+        }
+
+        .icon {
+            color: white;
+            font-size: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .fa-trash:hover {
+            color: red;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container-fluid">
-<div class="row">
-<div class="col-md-12">
-    <h2>car paper form</h2>
-    <div class="alert alert-success alert-dismissible" th:if="${successmessage}">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong th:text="${successmessage}">!</strong>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>car paper form</h2>
+            <div class="alert alert-success alert-dismissible" th:if="${successmessage}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong th:text="${successmessage}">!</strong>
+            </div>
+
+            <div class="alert alert-danger alert-dismissible" th:if="${errormessage}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong th:text="${errormessage}">!</strong>
+            </div>
+
+            <form action="#" th:action="@{${isAdd} ? '/save' : '/update'}" th:object="${car}" method="post"
+                  enctype="multipart/form-data">
+                <select class="form-control" th:field="${user.id}" id="dropOperator">
+                    <option value="0">select customer</option>
+                    <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}"></option>
+                </select>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="carbrand" placeholder="car brand"
+                           th:field="*{carBrand}">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="licenseplate" placeholder="license plate"
+                           th:field="*{licencePlate}">
+                </div>
+                <div class="form-group">
+                    <input type="file" class="form-control" id="file" placeholder="Upload car paper" th:field="*{files}"
+                           multiple="multiple">
+                </div>
+                <div class="form-group">
+                    <span th:each="file, itrStat : ${carfiles}" class="imagecontainer"
+                          th:id="'imageindex'+${itrStat.index}">
+                        <img th:src="@{'/images/'+${file.modifiedFileName}}"
+                             style="width: 80px; height: 80px;border-radius: 50%;margin-left: 10px;" class="image"
+                             th:if="${file.fileExtension != 'pdf'}">
+                        <img th:src="@{'/img/pdf.png'}"
+                             style="width: 80px; height: 80px;border-radius: 50%;margin-left: 10px;" class="image"
+                             th:if="${file.fileExtension == 'pdf'}">
+                        <span class="overlay">
+                            <a href="#" class="icon image-confirm-delete" title="image delete"
+                               th:attr="data-id=${itrStat.index}, data-name=${file.modifiedFileName}">remove
+                                <i class="fa fa-trash" style="color: red;"></i>
+                            </a>
+                        </span>
+                    </span>
+
+                </div>
+
+
+                <input type="hidden" class="form-control" th:field="*{removeImages}" id="removeImages">
+                <input type="hidden" class="form-control" th:field="*{ownerID}">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" th:text="${isAdd}?'Save':'Update'"></button>
+                </div>
+            </form>
+            <hr/>
+        </div>
+        <div class="col-md-12">
+            <H2>All Cars</H2>
+            <div style="margin-top:20px;">
+                <table class="table-striped- table-bordered" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th> UserID</th>
+                        <th> carbrand</th>
+                        <th> license plate</th>
+                        <th> Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cars : ${cars}">
+                        <td th:text="${cars.ownerID}"></td>
+                        <td th:text="${cars.carBrand}"></td>
+                        <td th:text="${cars.licencePlate}"></td>
+                        <td>
+                            <a th:href="@{'/editcar/' + ${cars.carID}}"> edit car<i class="fa fa-edit"
+                                                                                    style="font-size:21px;"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <div class="alert alert-danger alert-dismissible" th:if="${successmessage}">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong th:text="${successmessage}">!</strong>
-    </div>
-
-    <form action="#" th:action = "@{${isAdd} ? '/save' : '/update'}" th:object="${car}" method="post" enctype="multipart/form-data">
-        <select class="form-control" th:field="*{owner}"  id="dropOperator">
-            <option value="0">select customer</option>
-            <option th:each="u : ${users}" th:value="${u.id}" th:text="${u.name}"></option>
-        </select>
-        <div class="form-group">
-            <input type="text" class="form-control" id="carbrand" placeholder="car brand" th:field="*{carBrand}">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="licenseplate" placeholder="license plate" th:field="*{licencePlate}">
-        </div>
-        <div class="form-group">
-            <input type="file" class="form-control" id="file" placeholder="Upload car paper" th:field="*{files}" multiple="multiple">
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" th:text="${isAdd}?'Save':'Update'"></button>
-        </div>
-    </form>
-    <hr/>
 </div>
-    <div class="col-md-12">
-        <H2>All Cars</H2>
-        <div style="margin-top:20px;">
-            <table class="table-striped- table-bordered" style="width:100%">
-                <thead>
-                <tr>
-                    <th> UserID</th>
-                    <th> carbrand</th>
-                    <th> license plate</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="cars : ${cars}">
-                    <td th:text="${cars.ownerID}"></td>
-                    <td th:text="${cars.carBrand}"></td>
-                    <td th:text="${cars.licencePlate}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</div>
-
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootsrap.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var images = [];
+        $('.image-confirm-delete').on('click', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            images.push(name);
+            $('#removeImages').val(images);
+            $('#imageindex' + id).hide();
+        });
+    });
+
+</script>
+
+
 </body>
 </html>

@@ -12,10 +12,10 @@
 <body>
 <div align="center">
     <h2>Car repair job page</h2>
-    <form action="#" th:action="@{/createRepair}" method="post" th:object ="${repair}">
+    <form action="#" th:action="@{/createRepair}" method="post" th:object="${repair}">
         <lab>Car:</lab>
         <br>
-        <select  th:field = "${repair.carID}">
+        <select th:field="${repair.carID}">
             <option value="0">select car to create repairjob</option>
             <option th:each="u : ${listofcars}" th:value="${u.carID}" th:text="${u.licencePlate}"></option>
         </select>

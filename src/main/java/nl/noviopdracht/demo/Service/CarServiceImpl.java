@@ -14,24 +14,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
-    public class CarServiceImpl implements CarService {
+public class CarServiceImpl implements CarService {
     private final CarRepository repos;
     private final UserRepository userRepository;
     private final UploadPathService uploadPathService;
     private final CarFileRepository carFileRepository;
+    private final ServletContext context;
 
     @Autowired
-    public CarServiceImpl(CarRepository repos, UserRepository userRepository, UploadPathService uploadPathService, CarFileRepository carFileRepository) {
+    public CarServiceImpl(CarRepository repos, UserRepository userRepository, UploadPathService uploadPathService, CarFileRepository carFileRepository, ServletContext context) {
         this.repos = repos;
         this.userRepository = userRepository;
         this.uploadPathService = uploadPathService;
         this.carFileRepository = carFileRepository;
+        this.context = context;
     }
 
     @Override
@@ -41,9 +45,8 @@ import java.util.List;
 
         for
         (
-                Car car:carsList
-        )
-        {
+                Car car : carsList
+        ) {
             CarDTO carconver = new CarDTO();
             carconver.setCarID(car.getCarID());
             carconver.setCarBrand(car.getCarBrand());
@@ -57,23 +60,77 @@ import java.util.List;
 
     @Override
     public void saveCar(CarDTO carDTO, UserDTO userDTO) {
-        Car car = new Car(userRepository.getById(carDTO.getOwnerID()),carDTO.getCarBrand(),carDTO.getLicencePlate());
+        Car car = new Car(userRepository.getById(carDTO.getOwnerID()), carDTO.getCarBrand(), carDTO.getLicencePlate());
         repos.save(car);
     }
 
     @Override
     public Car save(Car car) {
+        car.setOwner(userRepository.getById(car.getOwnerID()));
         Car dbCar = repos.save(car);
-        if(dbCar != null && car.getFiles()!=null && car.getFiles().size()>0){
-            for(MultipartFile file : car.getFiles()){
+        if (dbCar != null && car.getFiles() != null && car.getFiles().size() > 0) {
+            for (MultipartFile file : car.getFiles()) {
                 String fileName = file.getOriginalFilename();
-                String modifiedFileName = FilenameUtils.getBaseName(fileName)+"_"+System.currentTimeMillis()+"."+FilenameUtils.getExtension(fileName);
+                String modifiedFileName = FilenameUtils.getBaseName(fileName) + "_" + System.currentTimeMillis() + "." + FilenameUtils.getExtension(fileName);
                 File storeFile = uploadPathService.getFilePath(modifiedFileName, "images");
-                if(storeFile != null){
+                if (storeFile != null) {
                     try {
                         FileUtils.writeByteArrayToFile(storeFile, file.getBytes());
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    catch (Exception e){
+                }
+                Carfiles files = new Carfiles();
+                files.setFileExtension(FilenameUtils.getExtension(fileName));
+                files.setFilename(fileName);
+                files.setModifiedFileName(modifiedFileName);
+                files.setCar(dbCar);
+                carFileRepository.save(files);
+
+            }
+        }
+
+        return dbCar;
+    }
+
+    @Override
+    public Car findById(Long carID) {
+        Optional<Car> car = repos.findById(carID);
+        if(car.isPresent()){
+            return car.get();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Carfiles> findFilesByUserId(Long carID) {
+        return carFileRepository.findFilesByCarId(carID);
+    }
+
+    @Override
+    public Car updateCar(Car car) {
+        car.setOwner(userRepository.getById(car.getOwnerID()));
+        Car dbCar = repos.save(car);
+
+        if(car != null && car.getRemoveImages() != null && car.getRemoveImages().size()>0){
+            carFileRepository.deleteFilesByUserUdAndImageNames(car.getCarID(), car.getRemoveImages());
+            for (String file : car.getRemoveImages()){
+                File dbFile = new File(context.getRealPath("/images/"+File.separator+file));
+                if(dbFile.exists()){
+                    dbFile.delete();
+                }
+            }
+        }
+
+        if (dbCar != null && car.getFiles() != null && car.getFiles().size() > 0) {
+            for (MultipartFile file : car.getFiles()) {
+                String fileName = file.getOriginalFilename();
+                String modifiedFileName = FilenameUtils.getBaseName(fileName) + "_" + System.currentTimeMillis() + "." + FilenameUtils.getExtension(fileName);
+                File storeFile = uploadPathService.getFilePath(modifiedFileName, "images");
+                if (storeFile != null) {
+                    try {
+                        FileUtils.writeByteArrayToFile(storeFile, file.getBytes());
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }

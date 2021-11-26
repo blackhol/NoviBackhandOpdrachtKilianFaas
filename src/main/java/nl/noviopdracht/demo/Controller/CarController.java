@@ -21,7 +21,7 @@ public class CarController {
     private final UserService uservice;
 
 
-    public CarController(CarService cService , UserService uService){
+    public CarController(CarService cService, UserService uService) {
 
         this.cService = cService;
         this.uservice = uService;
@@ -29,7 +29,7 @@ public class CarController {
 
 
     @GetMapping("/add_car")
-    public String showCarForm(Model model){
+    public String showCarForm(Model model) {
         CarDTO carDTO = new CarDTO();
         model.addAttribute("car", carDTO);
         model.addAttribute("User", uservice.gettAllUsers());
@@ -37,14 +37,14 @@ public class CarController {
 
         return "car_form";
     }
+
     @PostMapping("/add_car")
-    public String showAddedCarForm(@Valid @ModelAttribute("car") CarDTO carDTO, UserDTO userDTO, BindingResult bindingResult){
+    public String showAddedCarForm(@Valid @ModelAttribute("car") CarDTO carDTO, UserDTO userDTO, BindingResult bindingResult) {
         System.out.println(carDTO);
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
 
             return "car_form";
-        }
-        else{
+        } else {
             cService.saveCar(carDTO, userDTO);
             return "car_form_succes";
         }

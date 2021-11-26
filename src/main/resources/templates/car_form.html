@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">>
+
 <head>
     <meta charset="UTF-8">
     <title>car_form</title>
@@ -12,7 +15,7 @@
     <form action="#" th:action="@{/add_car}" method="post" th:object="${car}">
         <label>CarOwner:</label>
 
-        <select class="form-control" th:field="${car.ownerID}"  id="dropOperator">
+        <select class="form-control" th:field="${car.ownerID}" id="dropOperator">
             <option value="0">select customer</option>
             <option th:each="u : ${User}" th:value="${u.id}" th:text="${u.name}"></option>
         </select>

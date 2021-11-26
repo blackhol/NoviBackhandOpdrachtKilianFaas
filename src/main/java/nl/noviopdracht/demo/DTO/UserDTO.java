@@ -1,7 +1,5 @@
 package nl.noviopdracht.demo.DTO;
 
-import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
-
 import javax.validation.constraints.NotBlank;
 
 
@@ -41,6 +39,7 @@ public class UserDTO {
     }
 
     public UserDTO(Long id, String name, String email, String password, String note, Date birthday, String cellnumber, String profession) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
