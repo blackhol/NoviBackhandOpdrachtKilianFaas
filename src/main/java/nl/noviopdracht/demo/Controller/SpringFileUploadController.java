@@ -1,27 +1,36 @@
 package nl.noviopdracht.demo.Controller;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.noviopdracht.demo.DTO.CarDTO;
 import nl.noviopdracht.demo.DTO.UserDTO;
 import nl.noviopdracht.demo.Model.Car;
 import nl.noviopdracht.demo.Model.User;
 import nl.noviopdracht.demo.Service.CarService;
+import nl.noviopdracht.demo.Service.UploadPathService;
 import nl.noviopdracht.demo.Service.UserService;
 import nl.noviopdracht.demo.files.Carfiles;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Controller
 public class SpringFileUploadController {
 
+    @Autowired
+    UploadPathService uploadPathService;
     @Autowired
     private CarService carService;
     @Autowired
@@ -80,6 +89,7 @@ public class SpringFileUploadController {
     @PostMapping(value = "/update")
     public String update(@ModelAttribute Car car, User user, RedirectAttributes redirectAttributes, Model model) {
         car.setOwnerID(user.getId());
+        log.info("SpringFileUploadController:" + car.toString());
         Car dbCar = carService.updateCar(car);
 
         if (dbCar != null) {
@@ -91,5 +101,6 @@ public class SpringFileUploadController {
             return "view/car";
         }
     }
+
 
 }

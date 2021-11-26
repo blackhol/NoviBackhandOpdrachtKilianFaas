@@ -1,5 +1,6 @@
 package nl.noviopdracht.demo.Model;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -14,7 +15,8 @@ public class Car implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long carID;
 
-    @ManyToOne()
+
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner")
     private User owner;
 

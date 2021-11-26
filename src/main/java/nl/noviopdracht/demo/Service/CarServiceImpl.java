@@ -1,5 +1,6 @@
 package nl.noviopdracht.demo.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.noviopdracht.demo.DTO.CarDTO;
 import nl.noviopdracht.demo.DTO.UserDTO;
 import nl.noviopdracht.demo.Model.Car;
@@ -10,18 +11,26 @@ import nl.noviopdracht.demo.files.Carfiles;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
+@Slf4j
 public class CarServiceImpl implements CarService {
     private final CarRepository repos;
     private final UserRepository userRepository;
@@ -111,6 +120,7 @@ public class CarServiceImpl implements CarService {
     public Car updateCar(Car car) {
         car.setOwner(userRepository.getById(car.getOwnerID()));
         Car dbCar = repos.save(car);
+        log.info(car.toString());
 
         if(car != null && car.getRemoveImages() != null && car.getRemoveImages().size()>0){
             carFileRepository.deleteFilesByUserUdAndImageNames(car.getCarID(), car.getRemoveImages());
@@ -146,4 +156,6 @@ public class CarServiceImpl implements CarService {
 
         return dbCar;
     }
+
+
 }

@@ -5,8 +5,11 @@ import nl.noviopdracht.demo.DTO.UserDTO;
 import nl.noviopdracht.demo.Model.Car;
 import nl.noviopdracht.demo.files.Carfiles;
 
+import javax.annotation.Resource;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface CarService {
 
@@ -22,4 +25,7 @@ public interface CarService {
     List<Carfiles> findFilesByUserId(Long carID);
 
     Car updateCar(Car car);
+
+
+
 }
