@@ -15,7 +15,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("{noop}appel").roles("USER").and().withUser("admin").password("{noop}peer").roles("USER","ADMIN");
+        auth.inMemoryAuthentication()
+                .withUser("user").password("{noop}appel").roles("USER")
+                .and().withUser("admin").password("{noop}peer").roles("USER","ADMIN")
+                .and().withUser("mechanic").password("{noop}wrench").roles("MECH","ADMIN")
+                .and().withUser("cashier").password("{noop}register").roles("CASH","ADMIN")
+                .and().withUser("backofficeworker").password("{noop}computer").roles("BACK","ADMIN")
+                .and().withUser("admassistant").password("{noop}cellphone").roles("ADMA","ADMIN");
     }
 
 
@@ -26,6 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/").and().authorizeRequests()
                 .antMatchers("/secret/**").hasRole("ADMIN")
                 .antMatchers("/public/**").hasRole("USER")
+                .antMatchers("/public/**").hasRole("MECH")
+                .antMatchers("/public/**").hasRole("CASH")
+                .antMatchers("/public/**").hasRole("BACK")
+                .antMatchers("/public/**").hasRole("ADMA")
                 .antMatchers("/").permitAll()
                 .anyRequest()
                 .authenticated()
