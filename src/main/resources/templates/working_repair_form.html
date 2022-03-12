@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<label>working on car with license plate: </label>
+<div align="center">
+    <title>repair page</title>
+
+    <label>test tekst</label>
+    <form action="#" th:action="@{/add_part_to_repair/{id}(id=${repairId})}" method="post" th:object ="${Partinuse}">
+        <lab>parts using for repair:</lab>
+        <br>
+        <select th:field = "*{partId}">
+            <option value="0">select part to add to repair</option>
+            <option th:each="u : ${parts}" th:value="${u.id}" th:text="${u.partname}"></option>
+        </select>
+        <br>
+        <button type="submit">pres here to add the part to the list of used parts</button>
+    </form>
+
+    <br>
+
+    <form action="#" th:action="@{/add_part_to_repair/{id}(id=${repairId})}" method="post" th:object="${Partinuse}">
+        <lab>actions using on car:</lab>
+        <br>
+        <select th:field = "*{actionId}">
+            <option value="0">select action to add to repair</option>
+            <option th:each="u : ${actions}" th:value="${u.actionId}" th:text="${u.name}"></option>
+        </select>
+        <br>
+        <button type="submit">pres here to add the action to the list of used actions</button>
+    </form>
+    <br>
+    <br>
+    <button><a href="/Index">Click here to register</a></button>
+
+</div>
+</body>
+</html>

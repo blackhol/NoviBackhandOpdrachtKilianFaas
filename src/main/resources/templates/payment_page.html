@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div align="center">
+    <label>select repair to pay</label>
+    <form action="#" th:action="@{/pay_repair}" method="get" th:object="${selectedRepair}" >
+        <select th:field="*{repID}">
+            <option value="0">select repair</option>
+            <option th:each="u : ${repairList}" th:value="${u.repID}" th:text="${u.repID}"></option>
+        </select>
+        <button type="submit">click to recive receipts</button>
+    </form>
+
+<br>
+<br>
+</div>
+</body>
+</html>

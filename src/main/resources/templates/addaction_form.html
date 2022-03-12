@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addAction_form</title>
+</head>
+<body>
+<div align="center">
+
+    <h1>add repair actions</h1>
+
+    <br>
+
+    <form action="#" th:action="@{/add_action}" method="post" th:object="${action}">
+        <label>Action:</label>
+        <input type="text" th:field="*{name}">
+        <p class="hasErrors" th:if="${#fields.hasErrors('name')}" >NAME ERROR</p>
+
+        <br>
+
+        <label>price:</label>
+        <input type="text" th:field="*{price}">
+        <p class="hasErrors" th:if="${#fields.hasErrors('price')}">PRICE ERROR</p>
+        <br>
+        <button type="submit">Add action</button>
+        <button><a href="/">Homepage</a></button>
+    </form>
+</div>
+</body>
+</html>

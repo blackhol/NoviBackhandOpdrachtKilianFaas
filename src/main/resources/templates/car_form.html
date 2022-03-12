@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">>
+
+<head>
+    <meta charset="UTF-8">
+    <title>car_form</title>
+</head>
+<body>
+<div align="center">
+
+    <h1>add car to customer form</h1>
+    <br>
+    <form action="#" th:action="@{/add_car}" method="post" th:object="${car}">
+        <label>CarOwner:</label>
+
+        <select class="form-control" th:field="${car.ownerID}" id="dropOperator">
+            <option value="0">select customer</option>
+            <option th:each="u : ${User}" th:value="${u.id}" th:text="${u.name}"></option>
+        </select>
+        <br>
+        <br>
+        <label>Carbrand:</label>
+        <input type="text" th:field="${car.carBrand}" >
+        <br>
+        <br>
+        <label>Licenceplate:</label>
+        <input type="text" th:field="${car.licencePlate}" >
+        <br>
+        <br>
+
+        <button type="submit">pres to sign car to customer</button>
+    </form>
+    <br>
+    <br>
+    <button><a href="/">Homepage</a></button>
+</div>
+</body>
+</html>

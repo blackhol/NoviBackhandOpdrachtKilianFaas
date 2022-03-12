@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div align="center">
+<div class="container">
+    <div class="row">
+        <div>
+            <table id="example" class="table table-borderd">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="items : ${alluseditems}">
+
+                    <td th:text="${items.name}">Name</td>
+                    <td th:text="${items.price}">Name</td>
+                </tr>
+
+
+
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+</div>
+    <lab>price exlusief taxes</lab>
+    <br>
+    <td th:text="${priceEXCL}"></td>
+    <br>
+    <lab>price inclusief taxes</lab>
+    <br>
+    <td th:text="${priceINCL}"></td>
+    <br>
+    <label>Customer payed:</label>
+    <form action="#" th:action="@{/payment_succes}" method="post" th:object="${payingrepair}">
+        <input
+                type="checkbox"
+                name="customerpayed"
+                th:checked="${payingrepair.paymentComfirm}"
+        >
+        <button type="submit">pres here to complete payment for repair</button>
+    </form>
+</div>
+
+
+
+
+</body>
+</html>
